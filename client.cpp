@@ -16,6 +16,7 @@ using namespace std;
 void *threadproc(void *arg);
 packetBuffer *myPacketBuffer = new packetBuffer(2048);
 monitor *myMonitor = new monitor();
+char* outputPortGlobal;
 
 int main(int argc, char *argv[]) {
     string mediaIP;
@@ -58,6 +59,9 @@ int main(int argc, char *argv[]) {
         maxDelay = argv[5];
     }
 
+    outputPortGlobal = (char*)calloc(outputPort.length() + 1, sizeof(char*));
+    strncpy(outputPortGlobal, outputPort.c_str(), outputPort.length());
+    
     socketUtility *mySocketUtility = new socketUtility(mediaIP.c_str() , mediaPort.c_str(), outputIP.c_str() , outputPort.c_str());
 
     fd_set master;
@@ -118,7 +122,8 @@ int main(int argc, char *argv[]) {
 
 void *threadproc(void *arg) {
     while(1) {
-        sleep(5);
+      printf("--stats for :%s\n", outputPortGlobal);
+      sleep(5);
         myPacketBuffer -> bufferMonitor();
         myMonitor -> printMonitor();
     }
