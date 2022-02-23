@@ -2,6 +2,7 @@
 #define INCLUDED_MONITOR_H
 
 #include <iostream>
+#include <ctime>
 #include <stdint.h>
 #include <string.h>
 #include <arpa/inet.h>
@@ -55,7 +56,8 @@ class monitor {
             recovered = newRecovered;
         }
         void printMonitor() {
-            printf("media stream:\n");
+            std::time_t t = std::time(0);
+            printf("media stream at %d :\n", t);
             media -> printStatus();
             printf("    recovered/lost: %d/%d = %lf\n" , recovered , media -> lost , (100 * recovered / (double)media -> lost));
             printf("    loss rate after recovery: %d/%d = %lf\n" , (media -> lost - recovered) , (media -> recvd + media -> lost) , ( 100 * (media -> lost - recovered) / (double)(media -> recvd + media -> lost) ) );
