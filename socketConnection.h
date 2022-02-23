@@ -65,6 +65,8 @@ class socketUtility {
         bool isMulticastAddress(const char* mediaIP) {
             string IPstr(mediaIP);
             string firstByteStr = IPstr.substr(0 , 3);
+//            std::cout << IPstr << '\n';
+//            std::cout << firstByteStr << '\n';
             if(stoi(firstByteStr) >= 224 && stoi(firstByteStr) <= 239) {
                 return true;
             }
@@ -124,7 +126,7 @@ class socketUtility {
                 return -1;
             }
 
-            if(bind(sockfd , localAddr->ai_addr , localAddr->ai_addrlen) != 0) {
+            if(::bind(sockfd , localAddr->ai_addr , localAddr->ai_addrlen) != 0) {
                 perror("bind() failed");
                 if(localAddr)
                     freeaddrinfo(localAddr);
