@@ -238,7 +238,7 @@ class packetBuffer {
                 if(differ < 0) {
                     printf("gg , differ < 0: %d\n" , differ);
                     printf("SNBase:%d , minSN:%d , headSN:%d\n", SNBase , minSN , temp->getSN());
-                    exit(1);
+                    //exit(1);
                 }
                 else {
                     for(int i = 0 ; i < differ ; i++) {
