@@ -105,6 +105,10 @@ class packetBuffer {
             temp -> dataUsed = length;
             temp -> next = NULL;
             memcpy(temp -> dataBuffer , buffer , length);
+            node *temp2 = fecQueue -> tail;
+            if (temp2 -> getSN() > temp -> getSN()) {
+                printf("opppa! tail SN: %d new node SN: %d\n", temp2 -> getSN(), temp -> getSN());
+            }
             fecQueue -> enqueue(temp);
         }
         void updateFecQueue() {
@@ -232,7 +236,7 @@ class packetBuffer {
             if(temp) {
                 int differ = SNBase - temp -> getSN();
                 if(differ < 0) {
-                    //printf("gg , differ < 0: %d\n" , differ);
+                    printf("gg , differ < 0: %d\n" , differ);
                     printf("SNBase:%d , minSN:%d , headSN:%d\n", SNBase , minSN , temp->getSN());
                     exit(1);
                 }
