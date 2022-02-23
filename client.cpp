@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     else if(argc == 4) {
         mediaIP = argv[1];
         mediaPort = argv[2];
-        maxDelay = argv[5];
+        maxDelay = argv[4];
     }
     else if(argc == 5) {
         mediaIP = argv[1];
@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
         outputPort = argv[4];
         maxDelay = argv[5];
     }
+    cout << mediaIP << ":" << mediaPort << " " << outputIP << ":" << outputPort << " " << maxDelay;
 
     outputPortGlobal = (char*)calloc(outputPort.length() + 1, sizeof(char*));
     strncpy(outputPortGlobal, outputPort.c_str(), outputPort.length());
